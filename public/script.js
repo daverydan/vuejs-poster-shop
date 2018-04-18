@@ -14,7 +14,12 @@ new Vue({
 	},
 	methods: {
 		onSubmit: function() {
-			console.log(this.$http);
+			// imgur API call using vue-resource
+			this.$http
+				.get('/search/'.concat(this.search))
+				.then(function(response) {
+					console.log(response);
+				});
 		},
 		addItem: function(index) {
 			this.total += PRICE; // increment item total
