@@ -4,11 +4,7 @@ new Vue({
 	el: '#app',
 	data: {
 		total: 0,
-		items: [
-			{ id: 1, title: 'Item 1' },
-			{ id: 2, title: 'Item 2' },
-			{ id: 3, title: 'Item 3' }
-		],
+		items: [],
 		cart: [],
 		search: ''
 	},
@@ -18,7 +14,7 @@ new Vue({
 			this.$http
 				.get('/search/'.concat(this.search))
 				.then(function(response) {
-					console.log(response);
+					this.items = response.data;
 				});
 		},
 		addItem: function(index) {
