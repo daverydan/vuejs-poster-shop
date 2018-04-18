@@ -31,6 +31,23 @@ new Vue({
 					price: PRICE
 				});
 			}
+		}, // addItem
+		increment: function(item) {
+			item.qty++;
+			this.total += PRICE;
+		},
+		decrement: function(item) {
+			item.qty--;
+			this.total -= PRICE;
+			// check if qty is 0 & remove from cart
+			if (item.qty <= 0) {
+				for (var i =0; i < this.cart.length; i++) {
+					if (this.cart[i].id === item.id) {
+						this.cart.splice(i, 1);
+						break;
+					}
+				}
+			}
 		}
 	},
 	filters: {
