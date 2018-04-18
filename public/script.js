@@ -8,9 +8,13 @@ new Vue({
 			{ id: 2, title: 'Item 2' },
 			{ id: 3, title: 'Item 3' }
 		],
-		cart: []
+		cart: [],
+		search: ''
 	},
 	methods: {
+		onSubmit: function() {
+			console.log(this.search);
+		},
 		addItem: function(index) {
 			this.total += PRICE; // increment item total
 			var item = this.items[index]; // find the item by index
@@ -20,6 +24,7 @@ new Vue({
 				if (this.cart[i].id === item.id) {
 					found = true; // item found in cart
 					this.cart[i].qty++;
+					break;
 				}
 			}
 			// if item not found in cart - put in cart
