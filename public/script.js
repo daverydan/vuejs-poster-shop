@@ -6,17 +6,22 @@ new Vue({
 		total: 0,
 		items: [],
 		cart: [],
-		newSearch: '',
-		lastSearch: ''
+		newSearch: 'anime',
+		lastSearch: '',
+		loading: false,
+		price: PRICE
 	},
 	methods: {
 		onSubmit: function() {
+			this.items = [];
+			this.loading = true;
 			// imgur API call using vue-resource
 			this.$http
 				.get('/search/'.concat(this.newSearch))
 				.then(function(response) {
 					this.lastSearch = this.newSearch;
 					this.items = response.data;
+					this.loading = false;
 				});
 		},
 		addItem: function(index) {
@@ -63,5 +68,8 @@ new Vue({
 		currency: function(price) {
 			return '$'.concat(price.toFixed(2));
 		}
+	},
+	mounted: function() {
+		this.onSubmit();
 	}
 });
